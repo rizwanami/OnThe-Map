@@ -7,8 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		362FF3CA1DCE2453001B882C /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FF3C91DCE2453001B882C /* LinkViewController.swift */; };
+		3636A0901DC7C89100F781EE /* studentLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3636A08F1DC7C89100F781EE /* studentLocationController.swift */; };
+		3645AB901DBB9D3400B584C2 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB811DBB9D3400B584C2 /* Icon-40.png */; };
+		3645AB911DBB9D3400B584C2 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB821DBB9D3400B584C2 /* Icon-40@2x.png */; };
+		3645AB921DBB9D3400B584C2 /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB831DBB9D3400B584C2 /* Icon-40@3x.png */; };
+		3645AB931DBB9D3400B584C2 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB841DBB9D3400B584C2 /* Icon-60@2x.png */; };
+		3645AB941DBB9D3400B584C2 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB851DBB9D3400B584C2 /* Icon-60@3x.png */; };
+		3645AB951DBB9D3400B584C2 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB861DBB9D3400B584C2 /* Icon-76.png */; };
+		3645AB961DBB9D3400B584C2 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB871DBB9D3400B584C2 /* Icon-76@2x.png */; };
+		3645AB971DBB9D3400B584C2 /* Icon-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB881DBB9D3400B584C2 /* Icon-83.5@2x.png */; };
+		3645AB981DBB9D3400B584C2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB891DBB9D3400B584C2 /* Icon-Small.png */; };
+		3645AB991DBB9D3400B584C2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8A1DBB9D3400B584C2 /* Icon-Small@2x.png */; };
+		3645AB9A1DBB9D3400B584C2 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8B1DBB9D3400B584C2 /* Icon-Small@3x.png */; };
+		3645AB9B1DBB9D3400B584C2 /* list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8C1DBB9D3400B584C2 /* list.pdf */; };
+		3645AB9C1DBB9D3400B584C2 /* map.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8D1DBB9D3400B584C2 /* map.pdf */; };
+		3645AB9D1DBB9D3400B584C2 /* pin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8E1DBB9D3400B584C2 /* pin.pdf */; };
+		3645AB9E1DBB9D3400B584C2 /* udacity.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3645AB8F1DBB9D3400B584C2 /* udacity.pdf */; };
+		3645ABA01DBBFC4300B584C2 /* CommonCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645AB9F1DBBFC4300B584C2 /* CommonCode.swift */; };
+		3645ABAE1DBCD4B300B584C2 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABAD1DBCD4B300B584C2 /* UdacityClient.swift */; };
+		3645ABB01DBD428200B584C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABAF1DBD428200B584C2 /* MapViewController.swift */; };
+		3645ABB21DBD4A3300B584C2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABB11DBD4A3300B584C2 /* TableViewController.swift */; };
+		3645ABB41DBDA56400B584C2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABB31DBDA56400B584C2 /* TableViewCell.swift */; };
+		3645ABB61DBF7E9000B584C2 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABB51DBF7E9000B584C2 /* GCDBlackBox.swift */; };
+		3645ABB81DBFC46000B584C2 /* studentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3645ABB71DBFC46000B584C2 /* studentInformation.swift */; };
+		3686D80F1DCA1DBC00647B86 /* TabViewMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3686D80E1DCA1DBC00647B86 /* TabViewMethod.swift */; };
+		3686D8111DCA33FD00647B86 /* locationEntered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3686D8101DCA33FD00647B86 /* locationEntered.swift */; };
 		36AF9CE11DB3FD4600934DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AF9CE01DB3FD4600934DED /* AppDelegate.swift */; };
-		36AF9CE31DB3FD4600934DED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AF9CE21DB3FD4600934DED /* ViewController.swift */; };
+		36AF9CE31DB3FD4600934DED /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AF9CE21DB3FD4600934DED /* LoginController.swift */; };
 		36AF9CE61DB3FD4600934DED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36AF9CE41DB3FD4600934DED /* Main.storyboard */; };
 		36AF9CE91DB3FD4600934DED /* OnTheMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36AF9CE71DB3FD4600934DED /* OnTheMap.xcdatamodeld */; };
 		36AF9CEB1DB3FD4600934DED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36AF9CEA1DB3FD4600934DED /* Assets.xcassets */; };
@@ -35,9 +61,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		362FF3C91DCE2453001B882C /* LinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
+		3636A08F1DC7C89100F781EE /* studentLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentLocationController.swift; sourceTree = "<group>"; };
+		3645AB811DBB9D3400B584C2 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		3645AB821DBB9D3400B584C2 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		3645AB831DBB9D3400B584C2 /* Icon-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@3x.png"; sourceTree = "<group>"; };
+		3645AB841DBB9D3400B584C2 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		3645AB851DBB9D3400B584C2 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		3645AB861DBB9D3400B584C2 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		3645AB871DBB9D3400B584C2 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		3645AB881DBB9D3400B584C2 /* Icon-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-83.5@2x.png"; sourceTree = "<group>"; };
+		3645AB891DBB9D3400B584C2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		3645AB8A1DBB9D3400B584C2 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		3645AB8B1DBB9D3400B584C2 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
+		3645AB8C1DBB9D3400B584C2 /* list.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = list.pdf; sourceTree = "<group>"; };
+		3645AB8D1DBB9D3400B584C2 /* map.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = map.pdf; sourceTree = "<group>"; };
+		3645AB8E1DBB9D3400B584C2 /* pin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pin.pdf; sourceTree = "<group>"; };
+		3645AB8F1DBB9D3400B584C2 /* udacity.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = udacity.pdf; sourceTree = "<group>"; };
+		3645AB9F1DBBFC4300B584C2 /* CommonCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonCode.swift; path = ../OnTheMap/CommonCode.swift; sourceTree = "<group>"; };
+		3645ABAD1DBCD4B300B584C2 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		3645ABAF1DBD428200B584C2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3645ABB11DBD4A3300B584C2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		3645ABB31DBDA56400B584C2 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		3645ABB51DBF7E9000B584C2 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		3645ABB71DBFC46000B584C2 /* studentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentInformation.swift; sourceTree = "<group>"; };
+		3686D80E1DCA1DBC00647B86 /* TabViewMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewMethod.swift; sourceTree = "<group>"; };
+		3686D8101DCA33FD00647B86 /* locationEntered.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationEntered.swift; sourceTree = "<group>"; };
 		36AF9CDD1DB3FD4600934DED /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36AF9CE01DB3FD4600934DED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36AF9CE21DB3FD4600934DED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		36AF9CE21DB3FD4600934DED /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		36AF9CE51DB3FD4600934DED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36AF9CE81DB3FD4600934DED /* OnTheMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OnTheMap.xcdatamodel; sourceTree = "<group>"; };
 		36AF9CEA1DB3FD4600934DED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,9 +128,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3645AB801DBB9D3400B584C2 /* On The Map Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3645AB811DBB9D3400B584C2 /* Icon-40.png */,
+				3645AB821DBB9D3400B584C2 /* Icon-40@2x.png */,
+				3645AB831DBB9D3400B584C2 /* Icon-40@3x.png */,
+				3645AB841DBB9D3400B584C2 /* Icon-60@2x.png */,
+				3645AB851DBB9D3400B584C2 /* Icon-60@3x.png */,
+				3645AB861DBB9D3400B584C2 /* Icon-76.png */,
+				3645AB871DBB9D3400B584C2 /* Icon-76@2x.png */,
+				3645AB881DBB9D3400B584C2 /* Icon-83.5@2x.png */,
+				3645AB891DBB9D3400B584C2 /* Icon-Small.png */,
+				3645AB8A1DBB9D3400B584C2 /* Icon-Small@2x.png */,
+				3645AB8B1DBB9D3400B584C2 /* Icon-Small@3x.png */,
+				3645AB8C1DBB9D3400B584C2 /* list.pdf */,
+				3645AB8D1DBB9D3400B584C2 /* map.pdf */,
+				3645AB8E1DBB9D3400B584C2 /* pin.pdf */,
+				3645AB8F1DBB9D3400B584C2 /* udacity.pdf */,
+			);
+			path = "On The Map Assets";
+			sourceTree = "<group>";
+		};
+		3645ABA81DBC461500B584C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3645AB9F1DBBFC4300B584C2 /* CommonCode.swift */,
+				3645ABAD1DBCD4B300B584C2 /* UdacityClient.swift */,
+				3645ABB51DBF7E9000B584C2 /* GCDBlackBox.swift */,
+				3645ABB71DBFC46000B584C2 /* studentInformation.swift */,
+				3686D80E1DCA1DBC00647B86 /* TabViewMethod.swift */,
+				3686D8101DCA33FD00647B86 /* locationEntered.swift */,
+			);
+			name = Model;
+			path = ../mdel;
+			sourceTree = "<group>";
+		};
+		3645ABAB1DBCD2AA00B584C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				36AF9CE41DB3FD4600934DED /* Main.storyboard */,
+				36AF9CEA1DB3FD4600934DED /* Assets.xcassets */,
+				36AF9CEC1DB3FD4600934DED /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3645ABAC1DBCD2B200B584C2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36AF9CE21DB3FD4600934DED /* LoginController.swift */,
+				3645ABAF1DBD428200B584C2 /* MapViewController.swift */,
+				3645ABB11DBD4A3300B584C2 /* TableViewController.swift */,
+				3645ABB31DBDA56400B584C2 /* TableViewCell.swift */,
+				3636A08F1DC7C89100F781EE /* studentLocationController.swift */,
+				362FF3C91DCE2453001B882C /* LinkViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		36AF9CD41DB3FD4600934DED = {
 			isa = PBXGroup;
 			children = (
+				3645AB801DBB9D3400B584C2 /* On The Map Assets */,
 				36AF9CDF1DB3FD4600934DED /* OnTheMap */,
 				36AF9CF71DB3FD4600934DED /* OnTheMapTests */,
 				36AF9D021DB3FD4600934DED /* OnTheMapUITests */,
@@ -99,11 +211,10 @@
 		36AF9CDF1DB3FD4600934DED /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				3645ABAC1DBCD2B200B584C2 /* Controller */,
+				3645ABAB1DBCD2AA00B584C2 /* View */,
+				3645ABA81DBC461500B584C2 /* Model */,
 				36AF9CE01DB3FD4600934DED /* AppDelegate.swift */,
-				36AF9CE21DB3FD4600934DED /* ViewController.swift */,
-				36AF9CE41DB3FD4600934DED /* Main.storyboard */,
-				36AF9CEA1DB3FD4600934DED /* Assets.xcassets */,
-				36AF9CEC1DB3FD4600934DED /* LaunchScreen.storyboard */,
 				36AF9CEF1DB3FD4600934DED /* Info.plist */,
 				36AF9CE71DB3FD4600934DED /* OnTheMap.xcdatamodeld */,
 			);
@@ -235,9 +346,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3645AB9E1DBB9D3400B584C2 /* udacity.pdf in Resources */,
+				3645AB9D1DBB9D3400B584C2 /* pin.pdf in Resources */,
+				3645AB971DBB9D3400B584C2 /* Icon-83.5@2x.png in Resources */,
+				3645AB941DBB9D3400B584C2 /* Icon-60@3x.png in Resources */,
+				3645AB901DBB9D3400B584C2 /* Icon-40.png in Resources */,
 				36AF9CEE1DB3FD4600934DED /* LaunchScreen.storyboard in Resources */,
 				36AF9CEB1DB3FD4600934DED /* Assets.xcassets in Resources */,
+				3645AB991DBB9D3400B584C2 /* Icon-Small@2x.png in Resources */,
+				3645AB931DBB9D3400B584C2 /* Icon-60@2x.png in Resources */,
 				36AF9CE61DB3FD4600934DED /* Main.storyboard in Resources */,
+				3645AB921DBB9D3400B584C2 /* Icon-40@3x.png in Resources */,
+				3645AB981DBB9D3400B584C2 /* Icon-Small.png in Resources */,
+				3645AB911DBB9D3400B584C2 /* Icon-40@2x.png in Resources */,
+				3645AB961DBB9D3400B584C2 /* Icon-76@2x.png in Resources */,
+				3645AB9A1DBB9D3400B584C2 /* Icon-Small@3x.png in Resources */,
+				3645AB9C1DBB9D3400B584C2 /* map.pdf in Resources */,
+				3645AB951DBB9D3400B584C2 /* Icon-76.png in Resources */,
+				3645AB9B1DBB9D3400B584C2 /* list.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,8 +389,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				36AF9CE91DB3FD4600934DED /* OnTheMap.xcdatamodeld in Sources */,
-				36AF9CE31DB3FD4600934DED /* ViewController.swift in Sources */,
+				3686D80F1DCA1DBC00647B86 /* TabViewMethod.swift in Sources */,
+				362FF3CA1DCE2453001B882C /* LinkViewController.swift in Sources */,
+				3645ABB41DBDA56400B584C2 /* TableViewCell.swift in Sources */,
+				3645ABB21DBD4A3300B584C2 /* TableViewController.swift in Sources */,
+				3645ABB01DBD428200B584C2 /* MapViewController.swift in Sources */,
+				3645ABAE1DBCD4B300B584C2 /* UdacityClient.swift in Sources */,
+				36AF9CE31DB3FD4600934DED /* LoginController.swift in Sources */,
+				3645ABB81DBFC46000B584C2 /* studentInformation.swift in Sources */,
 				36AF9CE11DB3FD4600934DED /* AppDelegate.swift in Sources */,
+				3645ABB61DBF7E9000B584C2 /* GCDBlackBox.swift in Sources */,
+				3686D8111DCA33FD00647B86 /* locationEntered.swift in Sources */,
+				3636A0901DC7C89100F781EE /* studentLocationController.swift in Sources */,
+				3645ABA01DBBFC4300B584C2 /* CommonCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = makeurway.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,6 +565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = makeurway.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +646,7 @@
 				36AF9D0A1DB3FD4600934DED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36AF9D0B1DB3FD4600934DED /* Build configuration list for PBXNativeTarget "OnTheMapTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +655,7 @@
 				36AF9D0D1DB3FD4600934DED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36AF9D0E1DB3FD4600934DED /* Build configuration list for PBXNativeTarget "OnTheMapUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +664,7 @@
 				36AF9D101DB3FD4600934DED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
