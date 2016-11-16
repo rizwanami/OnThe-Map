@@ -18,7 +18,8 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var Refresh: UIBarButtonItem!
     
     @IBOutlet weak var Logout: UIBarButtonItem!
-    let studentDetails = studentInformation.studentInformations
+    let studentDetails =  studentInformation.studentInformations
+    
     
     override func viewDidLoad()
     {
@@ -67,7 +68,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
                 performUIUpdatesOnMain{
                     
                     self.uiEnable(Status: true)
-                   
+                
                 }
             } else if (error == "The Internet connection appears to be offline.") {
                 
@@ -119,29 +120,51 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return studentDetails.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "details", for: indexPath) as! tableViewCell
         
-        let student = studentDetails[indexPath.row]
+       let student = studentDetails[indexPath.row]
         
-        cell.textLabel?.text = student.name
-        cell.title.text = student.location
+        cell.title.text = student.name
+        cell.location.text = student.location
+        
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let student = studentDetails[indexPath.row]
-        let mediaURL = student.mediaURL
-        print(mediaURL)
-        
-        UIApplication.shared.openURL(URL(string: mediaURL)!)
+       let student = studentDetails[indexPath.row]
+       let mediaURLString = student.mediaURL
+       
+       if let mediaURL = URL(string: mediaURLString) {
+            if UIApplication.shared.canOpenURL(mediaURL) {
+               UIApplication.shared.openURL(mediaURL)
+            } else {
+               self.showAlert(alerttitle: "Incomplete URL", alertmessage: "Media URL [\(mediaURLString)] is incorrect or not fully formed")
+            }
+            
+       } else {
+            //Bad URL
+            self.showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
+       }
         
     }
     
     
+    //Display Alerts and Warning
+    func showAlert(alerttitle: String, alertmessage: String) {
+        let alertController = UIAlertController(title: alerttitle, message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            action in alertController.dismiss(animated: true, completion: nil)
+            
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
 }

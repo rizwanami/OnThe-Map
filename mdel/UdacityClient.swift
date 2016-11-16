@@ -126,6 +126,9 @@ class UdacityClient
                 print("Couldnt get Student data")
                 return
             }
+            
+            
+            
             let r = Range(0...data.count)
             let newData = data.subdata(in: r)
             var parsedJsonData: NSDictionary!

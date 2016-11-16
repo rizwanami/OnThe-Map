@@ -30,7 +30,7 @@ class LoginController: UIViewController,UITextFieldDelegate{
     @IBAction func login(_ sender: AnyObject) {
         if !isValidEmail(EmailAddress: emailID.text!)
         {
-            showAlert(alertmessage: "Invalid Email Address")
+            self.showAlert(alertmessage: "Invalid Email Address")
         }
         self.emailID.resignFirstResponder()
         self.Password.resignFirstResponder()
@@ -84,26 +84,26 @@ class LoginController: UIViewController,UITextFieldDelegate{
             
             udClient.get(method: udMethods.getUserDetails, range: 5, completionHandlerForGet:{ ( UserDetail, error) in
                 guard error == "" else {
-                    print("This is the error for getting UserDetail \(error)")
+                    self.showAlert(alertmessage: "This is the error for getting UserDetail \(error)")
                     return
                 }
                 guard let data = UserDetail as? NSDictionary else {
-                    print("There is no Data in UserDeatil \(UserDetail)")
+                    self.showAlert(alertmessage: "There is no Data in UserDeatil \(UserDetail)")
                     return
                 }
                 print(data)
             
                 guard let user = data["user"] as? [String: AnyObject] else {
-                    print("There is no data found in user array in data dictionary")
+                    self.showAlert(alertmessage: "There is no data found in user array in data dictionary")
                     return
                 }
                 guard let firstName = user["first_name"] as? String else {
-                    print("There is no first name founnd")
+                    self.showAlert(alertmessage: "There is no first name founnd")
                     return
                 }
                 guard let lastName = user["last_name"] as? String  else
                 {
-                        print("There is no last name is found")
+                    self.showAlert(alertmessage: "There is no last name is found")
                     return
             
                 }
@@ -111,13 +111,8 @@ class LoginController: UIViewController,UITextFieldDelegate{
                 udacityUser.lastName = lastName
                 let userName = "\(firstName) \(lastName)"
                 udacityUser.userName = userName
-                
-            
-            
-                
-            
                 })
-            
+            //Fetch the Student Information of all student in the network
             self.getStudentInformation(udClient: udClient)
         })
     }
@@ -128,6 +123,9 @@ class LoginController: UIViewController,UITextFieldDelegate{
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         let result = emailTest.evaluate(with: EmailAddress)
         return result
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.emailID.resignFirstResponder()
@@ -180,10 +178,13 @@ class LoginController: UIViewController,UITextFieldDelegate{
                 self.showAlert(alertmessage: "Last Name not found")
                 return
             }
+            
             udacityUser.firstName = firstName
             udacityUser.lastName = lastName
             let name = "\(firstName) \(lastName)"
             udacityUser.userName = name
+            
+            //Get location information of all student in the network
             udClient.getStudentLocations(completionHandlerForLocations: { (sucess,locationError) in
                 if sucess == true
                 {

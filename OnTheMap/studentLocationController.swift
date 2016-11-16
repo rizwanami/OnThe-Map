@@ -1,3 +1,4 @@
+
 //
 //  studentLocationController.swift
 //  OnTheMap
@@ -9,26 +10,68 @@
 import Foundation
 import UIKit
 import CoreLocation
+import MapKit
 
 
-class studentLocationController : UIViewController, UITextFieldDelegate {
+class studentLocationController : UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var submit: UIButton!
     var didGetLication : Bool = false
+    
     override func viewDidLoad() {
         textField.delegate = self
-}
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-        self.textField.resignFirstResponder()
-        locationEntred.locationEntred = textField.text!
-        return false
+        //locationEntred.locationEntred = textField.text
+
     }
+    
+    
+    
+    @IBAction func SubmitButton(_ sender: AnyObject) {
+    self.submit.isEnabled = true
+    locationEntred.locationEntred = textField.text
+
+        if textField.text == "" {
+            performUIUpdatesOnMain() {
+                self.submit.isEnabled = true
+                let alert = UIAlertController()
+                alert.title = "location textfield is empty"
+                alert.message = "Please enter Your location"
+                let alertAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.default){
+                    
+                    action in alert.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(alertAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }
+        else {
+            getLocation(completionHandlerForGetLocation: {(success) in
+                if success == true {
+                    let controller : LinkViewController
+                     controller = self.storyboard?.instantiateViewController(withIdentifier: "LinkViewController") as! LinkViewController
+                    self.present(controller, animated: true, completion: nil)
+                }
+            })
+        }
+    
+    }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//    
+//        textField.resignFirstResponder()
+//        
+//        return true
+//    }
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+         //locationEntred.locationEntred = textField.text
+    }
+    
     func getLocation(completionHandlerForGetLocation :@escaping (_ success : Bool)-> Void){
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(locationEntred.locationEntred, completionHandler: {( placeMark : [CLPlacemark]?, error) in
+        geoCoder.geocodeAddressString(locationEntred.locationEntred!, completionHandler: {( placeMark : [CLPlacemark]?, error) in
             
             guard error == nil else {
                 let error = ((error?.localizedDescription))
@@ -59,6 +102,7 @@ class studentLocationController : UIViewController, UITextFieldDelegate {
                                 
                             }
                             alert.addAction(alertAction)
+                            self.present(alert, animated: true, completion: nil)
 
                         }
                     }

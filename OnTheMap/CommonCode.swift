@@ -17,6 +17,7 @@ struct udacityUser
         static var lastName = ""
         static var userName = "userName"
         static var objectId = ""
+        static var mediaURL = ""
 }
 
 struct parseStudentLoc
