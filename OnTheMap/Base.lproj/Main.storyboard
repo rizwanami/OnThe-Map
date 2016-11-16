@@ -306,12 +306,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOb-if-qoZ">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOb-if-qoZ">
                                 <frame key="frameInset" minX="102" minY="554" width="187" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submit:" destination="YIh-XZ-dp8" eventType="touchUpInside" id="Ktp-b0-vd2"/>
-                                    <segue destination="Zw8-mH-uu0" kind="show" identifier="tabBarViewController" id="3C2-6z-kLL"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m0s-j4-lE5">
@@ -334,7 +333,6 @@
                             <constraint firstItem="m0s-j4-lE5" firstAttribute="leading" secondItem="hqV-hr-brL" secondAttribute="leadingMargin" constant="12" id="2Wk-XL-zZJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wOB-f5-ucb" secondAttribute="trailing" constant="12" id="51j-5r-6rT"/>
                             <constraint firstItem="wOB-f5-ucb" firstAttribute="top" secondItem="Dcm-G7-c4n" secondAttribute="bottom" constant="88" id="cTe-e1-yFj"/>
-                            <constraint firstItem="bOb-if-qoZ" firstAttribute="centerX" secondItem="hqV-hr-brL" secondAttribute="centerX" id="lds-qB-4wK"/>
                             <constraint firstItem="m0s-j4-lE5" firstAttribute="top" secondItem="wOB-f5-ucb" secondAttribute="bottom" constant="25" id="lhp-Gx-ANY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="m0s-j4-lE5" secondAttribute="trailing" constant="12" id="lv0-ul-mmP"/>
                             <constraint firstItem="wOB-f5-ucb" firstAttribute="leading" secondItem="hqV-hr-brL" secondAttribute="leadingMargin" constant="12" id="uMm-2i-fKZ"/>
@@ -345,6 +343,7 @@
                         <outlet property="mapView" destination="m0s-j4-lE5" id="rPJ-ea-fjv"/>
                         <outlet property="submit" destination="bOb-if-qoZ" id="6Hf-OL-eHe"/>
                         <outlet property="textField" destination="wOB-f5-ucb" id="MTW-hy-BrZ"/>
+                        <segue destination="Zw8-mH-uu0" kind="show" identifier="tabBarViewController" id="RYo-aY-VjP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Bk-MU-EvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -376,7 +375,7 @@
         <image name="pin" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3C2-6z-kLL"/>
+        <segue reference="RYo-aY-VjP"/>
         <segue reference="3bQ-my-BXe"/>
         <segue reference="zhI-kh-cOV"/>
     </inferredMetricsTieBreakers>
