@@ -18,6 +18,7 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     
     @IBOutlet var submit: UIButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     var coordinate : CLLocationCoordinate2D!
     var annotations : [MKAnnotation] = []
     let udacityClient = UdacityClient()
@@ -43,6 +44,9 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     override func viewWillAppear(_ animated: Bool) {
         self.mapAnnptation()
+        self.activityIndicator.isHidden = true
+        
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -192,7 +196,10 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     
     @IBAction func submit(_ sender: AnyObject) {
+
     locationEntred.urlEntred = textField.text
+        activityIndicator.startAnimating()
+        
         self.UIEnable(status: false)
         performUIUpdatesOnMain() {
         if self.textField.text == "" {
@@ -209,6 +216,7 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
             }
             
         else {
+            
             self.updateTheList(comletionHandlerForUpdateTheList: { (success: Bool) in
                 if success == true {
                     self.performSegue(withIdentifier: "tabBarViewController", sender: self)
@@ -223,6 +231,7 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     func UIEnable(status : Bool) {
         self.submit.isEnabled = status
         self.textField.isEnabled = status
+        self.activityIndicator.isHidden = status
     }
     
 }

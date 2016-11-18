@@ -109,7 +109,7 @@ class UdacityClient
     func getStudentLocations(completionHandlerForLocations: @escaping (_ sucess: Bool,_ error: String) -> Void)
     {
         let method = udMethods.getStudentLocations
-
+        
         let url = NSURL(string: method)
         let request = NSMutableURLRequest(url: url as! URL)
         request.addValue(udParameter.applicationID, forHTTPHeaderField: "X-Parse-Application-Id")
@@ -155,7 +155,7 @@ class UdacityClient
     
     func postParseApi(method: String, httpBody: String, range: Int, completionHandlerForPost:@escaping (_ dataDictionary :Any,_ errorString :String) -> Void)
     {
-       
+        
         let method = method
         let url = NSURL(string: method)
         let request = NSMutableURLRequest(url: url as! URL)

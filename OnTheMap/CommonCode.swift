@@ -11,18 +11,18 @@ import Foundation
 
 struct udacityUser
 {
-        static var userID = ""
-        static var sessionID = "sessionID"
-        static var firstName = ""
-        static var lastName = ""
-        static var userName = "userName"
-        static var objectId = ""
-        static var mediaURL = ""
+    static var userID = ""
+    static var sessionID = "sessionID"
+    static var firstName = ""
+    static var lastName = ""
+    static var userName = "userName"
+    static var objectId = ""
+    static var mediaURL = ""
 }
 
 struct parseStudentLoc
 {
-        static var studentLocations: [[String:AnyObject]]!
+    static var studentLocations: [[String:AnyObject]]!
 }
 
 

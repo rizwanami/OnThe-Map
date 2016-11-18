@@ -17,21 +17,22 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
     
     @IBOutlet weak var textField: UITextField!
     
+    @IBOutlet var activityBar: UIActivityIndicatorView!
     @IBOutlet weak var submit: UIButton!
     var didGetLication : Bool = false
     
     override func viewDidLoad() {
         textField.delegate = self
-        //locationEntred.locationEntred = textField.text
-
+        activityBar.isHidden = true
     }
     
     
-    
     @IBAction func SubmitButton(_ sender: AnyObject) {
-    self.submit.isEnabled = true
-    locationEntred.locationEntred = textField.text
-
+        
+        
+        self.submit.isEnabled = true
+        locationEntred.locationEntred = textField.text
+        
         if textField.text == "" {
             performUIUpdatesOnMain() {
                 self.submit.isEnabled = true
@@ -50,25 +51,19 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
         else {
             getLocation(completionHandlerForGetLocation: {(success) in
                 if success == true {
+                    
                     let controller : LinkViewController
-                     controller = self.storyboard?.instantiateViewController(withIdentifier: "LinkViewController") as! LinkViewController
+                    controller = self.storyboard?.instantiateViewController(withIdentifier: "LinkViewController") as! LinkViewController
                     self.present(controller, animated: true, completion: nil)
                 }
             })
+            activityBar.isHidden = false
+            activityBar.startAnimating()
         }
-    
+        
     }
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//    
-//        textField.resignFirstResponder()
-//        
-//        return true
-//    }
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-         //locationEntred.locationEntred = textField.text
-    }
-    
+       
     func getLocation(completionHandlerForGetLocation :@escaping (_ success : Bool)-> Void){
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationEntred.locationEntred!, completionHandler: {( placeMark : [CLPlacemark]?, error) in
@@ -84,42 +79,42 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
                         alert.title = "Cannot Connect To Server"
                         alert.message = "Please Check Your Internet Connection"
                         let alertAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.default){
-                        
-                        action in alert.dismiss(animated: true, completion: nil)
-                    }
+                            
+                            action in alert.dismiss(animated: true, completion: nil)
+                        }
                         alert.addAction(alertAction)
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
-                    else if error == "The operation couldn’t be completed. (kCLErrorDomain error 8.)" {
-                        performUIUpdatesOnMain() {
-                            self.submit.isEnabled = true
-                            let alert = UIAlertController()
-                            alert.title = "Location Not Found"
-                            alert.message = "Please try another Location"
-                            let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                                action in alert.dismiss(animated: true, completion: nil)
-                                
-                            }
-                            alert.addAction(alertAction)
-                            self.present(alert, animated: true, completion: nil)
-
+                else if error == "The operation couldn’t be completed. (kCLErrorDomain error 8.)" {
+                    performUIUpdatesOnMain() {
+                        self.submit.isEnabled = true
+                        let alert = UIAlertController()
+                        alert.title = "Location Not Found"
+                        alert.message = "Please try another Location"
+                        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                            action in alert.dismiss(animated: true, completion: nil)
+                            
                         }
+                        alert.addAction(alertAction)
+                        self.present(alert, animated: true, completion: nil)
+                        
                     }
+                }
                 
-                 return
-            
-            
+                return
+                
+                
                 
             }
-        guard let placemark = placeMark else {
-            print("NO Placemark ")
-            return
-            
-        }
+            guard let placemark = placeMark else {
+                print("NO Placemark ")
+                return
+                
+            }
             guard let latitude = placemark[0].location?.coordinate.latitude else {
                 print("could not coppy latitude")
-            return
+                return
             }
             guard let longitude = placemark[0].location?.coordinate.longitude else {
                 print("could not print longitude")
@@ -129,10 +124,10 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
             locationEntred.longitude = longitude
             completionHandlerForGetLocation(true)
             
-        
+            
         })
-    
-    
+        
+        
     }
-
+    
 }

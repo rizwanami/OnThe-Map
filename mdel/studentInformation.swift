@@ -28,9 +28,9 @@ struct studentInformation
             self.location = ""
         }
         if let mediaURL = dictionary["mediaURL"] as? String {
-           self.mediaURL = mediaURL
+            self.mediaURL = mediaURL
         } else {
-           self.mediaURL = "www.google.com"
+            self.mediaURL = "www.google.com"
         }
         if let uniqueKey = dictionary[ "uniqueKey"] as? String {
             self.uniqueKey = uniqueKey
@@ -48,9 +48,9 @@ extension studentInformation
         
         for d in parseStudentLoc.studentLocations! {
             if d["firstName"] != nil {
-            
-            studentArray.append(studentInformation(dictionary: d))
-        }
+                
+                studentArray.append(studentInformation(dictionary: d))
+            }
         }
         
         return studentArray

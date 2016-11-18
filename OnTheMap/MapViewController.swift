@@ -50,13 +50,22 @@ class mapView: UIViewController,MKMapViewDelegate
         
       if control == view.rightCalloutAccessoryView {
            let app = UIApplication.shared
+
+        let mediaURLString = ((view.annotation?.subtitle)!)! as String
+        if  let mediaURl = URL(string : mediaURLString) {
+            if app.canOpenURL(mediaURl) {
+                app.openURL(mediaURl)
+            } else {
+                showAlert(alerttitle:"Incomplete URL" , alertmessage:  "Media URL [\(mediaURLString)] is incorrect or not fully formed")
+            }
+        } else {
+            showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
+        }
         
         
         
-//            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(URL(string: (view.annotation?.subtitle!!)!)! as URL)
-        //}
-       }
+
+      }
    }
 
 
@@ -66,7 +75,7 @@ class mapView: UIViewController,MKMapViewDelegate
         {
             performSegue(withIdentifier: "studentLocation", sender: self)
         } else {
-            let alert = UIAlertController()
+                        let alert = UIAlertController()
             alert.title = "Do you want to overwrite"
             alert.message = ""
             
@@ -101,15 +110,7 @@ class mapView: UIViewController,MKMapViewDelegate
                 
                 //some message here
                 performUIUpdatesOnMain{
-                    let alert = UIAlertController()
-                    alert.title = "Unable Connect To Server"
-                    alert.message = "Check your internet connection"
-                    let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                    action in alert.dismiss(animated: true, completion: nil)
-                    }
-                    
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
+                    self.showAlert(alerttitle: "Unable Connect To Server", alertmessage: "Check your internet connection")
                     
                 }
             } else {

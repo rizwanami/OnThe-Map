@@ -14,7 +14,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var table: UITableView!
     
     @IBOutlet weak var pin: UIBarButtonItem!
-   
+    
     @IBOutlet weak var Refresh: UIBarButtonItem!
     
     @IBOutlet weak var Logout: UIBarButtonItem!
@@ -23,11 +23,11 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewDidLoad()
     {
-        //Assign Data Source and Delegate
+        
         table.dataSource = self
         table.delegate = self
-            }
-
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -35,7 +35,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     @IBAction func pin(_ sender: AnyObject) {
-     
+        
         if  udacityUser.objectId == ""
         {
             performSegue(withIdentifier: "studentLocation", sender: self)
@@ -47,7 +47,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
             let continueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
                 action in self.performSegue(withIdentifier: "studentLocation", sender: self)
             }
-            let cancelAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
                 action in alert.dismiss(animated: true, completion: nil)
             }
             alert.addAction(continueAction)
@@ -57,22 +57,19 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
-
-        
     
-    
-    @IBAction func refreshButton(_ sender: AnyObject) {
+@IBAction func refreshButton(_ sender: AnyObject) {
         let studentLocation = UdacityClient()
         studentLocation.getStudentLocations{(success, error) in
             if success == true {
                 performUIUpdatesOnMain{
                     
                     self.uiEnable(Status: true)
-                
+                    
                 }
             } else if (error == "The Internet connection appears to be offline.") {
                 
-                //some message here
+                
                 performUIUpdatesOnMain{
                     let alert = UIAlertController()
                     alert.title = "Unable Connect To Server"
@@ -90,7 +87,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
                 print(error)
             }
         }
-
+        
     }
     
     @IBAction func logOut(_ sender: AnyObject) {
@@ -107,7 +104,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
                 print("logOut Error is: \(error)")
             }
         })
-
+        
     }
     
     func uiEnable(Status : Bool) {
@@ -127,7 +124,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "details", for: indexPath) as! tableViewCell
         
-       let student = studentDetails[indexPath.row]
+        let student = studentDetails[indexPath.row]
         
         cell.title.text = student.name
         cell.location.text = student.location
@@ -138,25 +135,24 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       let student = studentDetails[indexPath.row]
-       let mediaURLString = student.mediaURL
-       
-       if let mediaURL = URL(string: mediaURLString) {
+        let student = studentDetails[indexPath.row]
+        let mediaURLString = student.mediaURL
+        
+        if let mediaURL = URL(string: mediaURLString) {
             if UIApplication.shared.canOpenURL(mediaURL) {
-               UIApplication.shared.openURL(mediaURL)
+                UIApplication.shared.openURL(mediaURL)
             } else {
-               self.showAlert(alerttitle: "Incomplete URL", alertmessage: "Media URL [\(mediaURLString)] is incorrect or not fully formed")
+                self.showAlert(alerttitle:"Incomplete URL", alertmessage: "Media URL [\(mediaURLString)] is incorrect or not fully formed")
             }
             
-       } else {
-            //Bad URL
+        } else {
+        
             self.showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
-       }
+        } 
         
     }
     
     
-    //Display Alerts and Warning
     func showAlert(alerttitle: String, alertmessage: String) {
         let alertController = UIAlertController(title: alerttitle, message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
@@ -166,5 +162,5 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
 }
