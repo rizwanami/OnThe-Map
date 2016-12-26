@@ -17,71 +17,73 @@ class LoginController: UIViewController,UITextFieldDelegate{
     @IBOutlet var activityBar: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         emailID.delegate = self
         Password.delegate = self
         activityBar.isHidden = true
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        self.activityBar.isHidden = true
     }
     
     
     
+    
     @IBAction func login(_ sender: AnyObject) {
-        activityBar.isHidden = false
         
-        activityBar.startAnimating()
+        activityBar.isHidden = true
+        activityBar.stopAnimating()
+        
         if !isValidEmail(EmailAddress: emailID.text!)
         {
             self.showAlert(alertmessage: "Invalid Email Address")
-            activityBar.isHidden = true
-            activityBar.stopAnimating()
         }
+        
         self.emailID.resignFirstResponder()
         self.Password.resignFirstResponder()
         
+        self.activityBar.isHidden = false
+        self.activityBar.startAnimating()
         let httpBody = "{\"udacity\": {\"username\": \"\(self.emailID.text!)\", \"password\": \"\(self.Password.text!)\"}}"
         let udClient = UdacityClient()
         let loginHandler = udClient.postApi(method: udMethods.authenticate, httpBody: httpBody, range: 5, completionHandlerForPost:
             { (userdata, error) in
                 guard error == "" else
                 {
-                    print(error)
-                    self.showAlert(alertmessage: error)
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
+                    
+                    print(error)
+                    self.showAlert(alertmessage: error)
                     return
                 }
                 
                 guard let data = userdata as? NSDictionary else
                 {
-                    print("Could not get data")
-                    self.showAlert(alertmessage: "Error Fetching Data")
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
+                    
+                    print("Could not get data")
+                    self.showAlert(alertmessage: "Error Fetching Data")
                     return
                 }
                 
                 guard let accountDetails = data["account"] as? NSDictionary else
                 {
-                    print("Missing account details")
-                    self.showAlert(alertmessage: "Missing Account Details")
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
                     
+                    print("Missing account details")
+                    self.showAlert(alertmessage: "Missing Account Details")
                     return
                 }
                 
                 guard let userId = accountDetails["key"] as? String else
                 {
-                    print("Missing User ID")
-                    self.showAlert(alertmessage: "Missing User ID")
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
                     
+                    print("Missing User ID")
+                    self.showAlert(alertmessage: "Missing User ID")
                     return
                 }
                 
@@ -89,69 +91,74 @@ class LoginController: UIViewController,UITextFieldDelegate{
                 
                 guard let sessionDetails = data["session"] as? NSDictionary else
                 {
-                    self.showAlert(alertmessage: "Missing Session Details")
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
                     
+                    self.showAlert(alertmessage: "Missing Session Details")
                     return
                 }
                 
                 guard let sessionID = sessionDetails["id"] as? String else
                 {
-                    self.showAlert(alertmessage: "cant get session id")
                     self.activityBar.isHidden = true
                     self.activityBar.stopAnimating()
                     
+                    self.showAlert(alertmessage: "cant get session id")
                     return
                 }
                 udacityUser.sessionID = sessionID
                 
+                print("Before getUserDetails")
                 udClient.get(method: udMethods.getUserDetails, range: 5, completionHandlerForGet:{ ( UserDetail, error) in
+                    print("Inside closure of getUserDetails")
                     guard error == "" else {
-                        self.showAlert(alertmessage: "This is the error for getting UserDetail \(error)")
                         self.activityBar.isHidden = true
                         self.activityBar.stopAnimating()
                         
+                        self.showAlert(alertmessage: "This is the error for getting UserDetail \(error)")
                         return
                     }
                     guard let data = UserDetail as? NSDictionary else {
-                        self.showAlert(alertmessage: "There is no Data in UserDeatil \(UserDetail)")
                         self.activityBar.isHidden = true
                         self.activityBar.stopAnimating()
                         
+                        self.showAlert(alertmessage: "There is no Data in UserDeatil \(UserDetail)")
                         return
                     }
                     print(data)
                     
                     guard let user = data["user"] as? [String: AnyObject] else {
-                        self.showAlert(alertmessage: "There is no data found in user array in data dictionary")
                         self.activityBar.isHidden = true
                         self.activityBar.stopAnimating()
                         
+                        self.showAlert(alertmessage: "There is no data found in user array in data dictionary")
                         return
                     }
                     guard let firstName = user["first_name"] as? String else {
-                        self.showAlert(alertmessage: "There is no first name founnd")
                         self.activityBar.isHidden = true
                         self.activityBar.stopAnimating()
-                        
+                        self.showAlert(alertmessage: "There is no first name founnd")
                         return
                     }
                     guard let lastName = user["last_name"] as? String  else
                     {
-                        self.showAlert(alertmessage: "There is no last name is found")
                         self.activityBar.isHidden = true
                         self.activityBar.stopAnimating()
-                        
+                        self.showAlert(alertmessage: "There is no last name is found")
                         return
                     }
+                    
                     udacityUser.firstName = firstName
                     udacityUser.lastName = lastName
                     let userName = "\(firstName) \(lastName)"
                     udacityUser.userName = userName
+                    
+                    self.getStudentInformation(udClient: udClient)
+                    
+                    //self.showAlert(alertmessage: "Appication ID is Invalid ")
+                    print("End of getUserDetails")
                 })
-                
-                self.getStudentInformation(udClient: udClient)
+                print("After getUserDetails")
         })
     }
     
@@ -187,56 +194,21 @@ class LoginController: UIViewController,UITextFieldDelegate{
     }
     
     func getStudentInformation(udClient : UdacityClient) {
-        udClient.get(method: udMethods.getUserDetails,range: 5 ,completionHandlerForGet: { (data, error) in
-            guard error == "" else
+        //
+        udClient.getStudentLocations(completionHandlerForLocations: { (sucess,locationError) in
+            if sucess == true && (locationError == nil || locationError == "")
             {
-                self.showAlert(alertmessage: error)
-                return
+                self.activityBar.isHidden = false
+                self.activityBar.isAnimating
+                self.displayTabView()
             }
-            guard let udData = data as? NSDictionary else
+            else
             {
-                self.showAlert(alertmessage: "Error Converting Student Data")
-                return
+                self.activityBar.isHidden = true
+                self.activityBar.stopAnimating()
+                self.showAlert(alertmessage: "Unable to fetch student locations \(locationError)")
+                //print("This is invalid application ID : \(locationError) ")
             }
-            
-            guard let user = udData["user"] as? [String: AnyObject] else
-            {
-                self.showAlert(alertmessage: "User not found")
-                return
-            }
-            
-            guard let firstName = user["first_name"] as? String else
-            {
-                self.showAlert(alertmessage: "First Name not found")
-                return
-            }
-            
-            guard let lastName = user["last_name"] as? String else
-            {
-                self.showAlert(alertmessage: "Last Name not found")
-                return
-            }
-            
-            udacityUser.firstName = firstName
-            udacityUser.lastName = lastName
-            let name = "\(firstName) \(lastName)"
-            udacityUser.userName = name
-            
-            udClient.getStudentLocations(completionHandlerForLocations: { (sucess,locationError) in
-                if sucess == true
-                {
-                    
-                    self.displayTabView()
-                }
-                else
-                {
-                    self.showAlert(alertmessage: "Unable to fetch student locations")
-                    print(locationError)
-                }
-                
-            })
-            
-            
         })
         
     }

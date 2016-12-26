@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-class UdacityClient
+class UdacityClient : UIViewController
 {
     
     func postApi(method: String, httpBody: String, range: Int, completionHandlerForPost:@escaping (_ dataDictionary :Any,_ errorString :String) -> Void)
@@ -21,8 +21,11 @@ class UdacityClient
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = httpBody.data(using: String.Encoding.utf8)
+        print("Before Task")
         
         let task = URLSession.shared.dataTask(with: request as URLRequest){(data,response,error) in
+            print("\(response)")
+            print("Inside task")
             var errors = ""
             guard error == nil else
             {
@@ -62,9 +65,10 @@ class UdacityClient
             completionHandlerForPost(parsedJsonData,errors)
             
         }
+        print("after task before resume")
         
         task.resume()
-        
+        print("after task after resume")
     }
     
     func get(method: String, range: Int ,completionHandlerForGet: @escaping(_ dataDictionary :Any,_ errorString :String) -> Void)
@@ -109,7 +113,7 @@ class UdacityClient
     func getStudentLocations(completionHandlerForLocations: @escaping (_ sucess: Bool,_ error: String) -> Void)
     {
         let method = udMethods.getStudentLocations
-        
+
         let url = NSURL(string: method)
         let request = NSMutableURLRequest(url: url as! URL)
         request.addValue(udParameter.applicationID, forHTTPHeaderField: "X-Parse-Application-Id")
@@ -117,17 +121,14 @@ class UdacityClient
         let task = URLSession.shared.dataTask(with: request as! URLRequest){(data,response,error) in
             guard error == nil else
             {
-                print("Error while getting Student location")
                 completionHandlerForLocations(false,(error?.localizedDescription)!)
                 return
             }
             guard let data = data else
             {
-                print("Couldnt get Student data")
+                completionHandlerForLocations(false,"Unable to fetch student location data")
                 return
             }
-            
-            
             
             let r = Range(0...data.count)
             let newData = data.subdata(in: r)
@@ -138,12 +139,12 @@ class UdacityClient
             }
             catch
             {
-                print("couldnt parse the data")
+                completionHandlerForLocations(false,"Unable to Parse Jason Data")
                 return
             }
             guard let studentLocations = parsedJsonData["results"] as?[[String:AnyObject]] else
             {
-                print("Could not get the studentLocations")
+                completionHandlerForLocations(false,parsedJsonData["error"] as! String)
                 return
             }
             
@@ -155,7 +156,7 @@ class UdacityClient
     
     func postParseApi(method: String, httpBody: String, range: Int, completionHandlerForPost:@escaping (_ dataDictionary :Any,_ errorString :String) -> Void)
     {
-        
+       
         let method = method
         let url = NSURL(string: method)
         let request = NSMutableURLRequest(url: url as! URL)
@@ -324,5 +325,14 @@ class UdacityClient
         }
         task.resume()
     }
-    
+    func showAlert(alertmessage: String) {
+        let alertController = UIAlertController(title: "Login Error!", message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            action in alertController.dismiss(animated: true, completion: nil)
+            
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+ 
 }

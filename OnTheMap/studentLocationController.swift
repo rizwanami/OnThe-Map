@@ -21,10 +21,20 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
     @IBOutlet weak var submit: UIButton!
     var didGetLication : Bool = false
     
+    
     override func viewDidLoad() {
         textField.delegate = self
         activityBar.isHidden = true
     }
+    override func viewWillAppear(_ animated: Bool) {
+        activityBar.isHidden = true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
     
     
     @IBAction func SubmitButton(_ sender: AnyObject) {
@@ -34,19 +44,7 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
         locationEntred.locationEntred = textField.text
         
         if textField.text == "" {
-            performUIUpdatesOnMain() {
-                self.submit.isEnabled = true
-                let alert = UIAlertController()
-                alert.title = "location textfield is empty"
-                alert.message = "Please enter Your location"
-                let alertAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.default){
-                    
-                    action in alert.dismiss(animated: true, completion: nil)
-                }
-                alert.addAction(alertAction)
-                self.present(alert, animated: true, completion: nil)
-            }
-            
+            self.showAlert(alerttitle: "location textfield is empty", alertmessage: "Please enter Your location")
         }
         else {
             getLocation(completionHandlerForGetLocation: {(success) in
@@ -60,10 +58,9 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
             activityBar.isHidden = false
             activityBar.startAnimating()
         }
-        
     }
     
-       
+    
     func getLocation(completionHandlerForGetLocation :@escaping (_ success : Bool)-> Void){
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(locationEntred.locationEntred!, completionHandler: {( placeMark : [CLPlacemark]?, error) in
@@ -73,40 +70,18 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
                 print(error)
                 if error == "The operation couldn’t be completed. (kCLErrorDomain error 2.)" {
                     print(error)
-                    performUIUpdatesOnMain() {
-                        self.submit.isEnabled = true
-                        let alert = UIAlertController()
-                        alert.title = "Cannot Connect To Server"
-                        alert.message = "Please Check Your Internet Connection"
-                        let alertAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.default){
-                            
-                            action in alert.dismiss(animated: true, completion: nil)
-                        }
-                        alert.addAction(alertAction)
-                        self.present(alert, animated: true, completion: nil)
-                    }
+                    self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                    self.submit.isEnabled = true
+                    self.activityBar.isHidden = true
                 }
                 else if error == "The operation couldn’t be completed. (kCLErrorDomain error 8.)" {
-                    performUIUpdatesOnMain() {
-                        self.submit.isEnabled = true
-                        let alert = UIAlertController()
-                        alert.title = "Location Not Found"
-                        alert.message = "Please try another Location"
-                        let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                            action in alert.dismiss(animated: true, completion: nil)
-                            
-                        }
-                        alert.addAction(alertAction)
-                        self.present(alert, animated: true, completion: nil)
-                        
-                    }
+                    self.showAlert(alerttitle: "Location Not Found", alertmessage: "Please try another Location")
+                    self.activityBar.isHidden = true
+                    self.submit.isEnabled = true
                 }
-                
                 return
-                
-                
-                
             }
+            
             guard let placemark = placeMark else {
                 print("NO Placemark ")
                 return
@@ -120,14 +95,25 @@ class studentLocationController : UIViewController, UITextFieldDelegate, MKMapVi
                 print("could not print longitude")
                 return
             }
+            self.activityBar.isHidden = false
+            self.activityBar.startAnimating()
             locationEntred.latitude = latitude
             locationEntred.longitude = longitude
             completionHandlerForGetLocation(true)
-            
-            
         })
         
         
     }
+    
+    func showAlert(alerttitle: String, alertmessage: String) {
+        let alertController = UIAlertController(title: alerttitle, message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            action in alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
 }

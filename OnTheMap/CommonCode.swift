@@ -11,18 +11,18 @@ import Foundation
 
 struct udacityUser
 {
-    static var userID = ""
-    static var sessionID = "sessionID"
-    static var firstName = ""
-    static var lastName = ""
-    static var userName = "userName"
-    static var objectId = ""
-    static var mediaURL = ""
+        static var userID = ""
+        static var sessionID = "sessionID"
+        static var firstName = ""
+        static var lastName = ""
+        static var userName = "userName"
+        static var objectId = ""
+        static var mediaURL = ""
 }
 
 struct parseStudentLoc
 {
-    static var studentLocations: [[String:AnyObject]]!
+        static var studentLocations: [[String:AnyObject]]!
 }
 
 
@@ -37,6 +37,7 @@ struct udMethods
 
 struct udParameter {
     static let applicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+    
     static let apiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
 }
 

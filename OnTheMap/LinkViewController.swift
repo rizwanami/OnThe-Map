@@ -25,7 +25,7 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     override func viewDidLoad() {
         self.loadMap()
-                self.mapView.delegate = self
+        self.mapView.delegate = self
         mapView.isHidden = false
         
     }
@@ -36,11 +36,11 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
         let region = MKCoordinateRegionMake(coordinate, MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
         
         mapView.setRegion(region, animated: true)
-
+        
     }
     
     
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.mapAnnptation()
@@ -56,6 +56,7 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         locationEntred.locationEntred = textField.text
+        textField.resignFirstResponder()
         return true
     }
     
@@ -74,23 +75,16 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
         let HttpBody = "{\"uniqueKey\": \"\(udacityUser.userID)\", \"firstName\": \"\(udacityUser.firstName)\", \"lastName\": \"\(udacityUser.lastName)\",\"mapString\": \"\(locationEntred.locationEntred!)\", \"mediaURL\": \"\(locationEntred.urlEntred!)\",\"latitude\":\(locationEntred.latitude!), \"longitude\":\(locationEntred.longitude!)}"
         if udacityUser.objectId == "" {
             self.udacityClient.postParseApi(method: udMethods.postStudentLocations, httpBody: HttpBody, range: 0){ (data, error) in
-                guard error == nil else {
-                    if error == "The Internet connection appears to be offline." {
-                        performUIUpdatesOnMain() {
-                            self.UIEnable(status: true)
-                            let alert = UIAlertController()
-                            alert.title = ""
-                            alert.message = ""
-                            let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                                action in alert.dismiss(animated: true, completion: nil)
-                            }
-                            alert.addAction(alertAction)
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                        
+                guard error == "" else {
+                    if error == "The operation couldn’t be completed. (kCLErrorDomain error 2.)" {
+                        print(error)
+                        self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                        self.submit.isEnabled = true
+                        self.activityIndicator.isHidden = true
                     }
-                    else if error != ""
+                    else
                     {
+                        self.showAlert(alerttitle: "Unknown Error", alertmessage: "Error : \(error)")
                         print(error)
                     }
                     return
@@ -116,31 +110,25 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
                         }
                     }
                     else
-                    {
-                        print(error)
+                        if error == "The operation couldn’t be completed. (kCLErrorDomain error 2.)"
+                        {
+                            print(error)
+                            self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                            self.submit.isEnabled = true
+                            self.activityIndicator.isHidden = true
                     }
                 })
-                
             }
         }
         else
         {
             self.udacityClient.putParseApi(method: udMethods.updateStudentLocations, httpBody: HttpBody, range: 0) { (data, error) in
                 guard error == nil || error == "" else {
-                    if error == "The Internet connection appears to be offline." {
-                        performUIUpdatesOnMain() {
-                            self.UIEnable(status: true)
-                            let alert = UIAlertController()
-                            alert.title = ""
-                            alert.message = ""
-                            let alertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                                action in alert.dismiss(animated: true, completion: nil)
-                                
-                            }
-                            alert.addAction(alertAction)
-                            self.present(alert, animated: true, completion: nil)
-                            
-                        }
+                    if error == "The operation couldn’t be completed. (kCLErrorDomain error 2.)" {
+                        print(error)
+                        self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                        self.submit.isEnabled = true
+                        self.activityIndicator.isHidden = true
                     }
                     else {
                         print(error)
@@ -159,8 +147,11 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
                             comletionHandlerForUpdateTheList(true)
                         }
                     }
-                    else {
+                    else if error == "The operation couldn’t be completed. (kCLErrorDomain error 2.)"{
                         print(error)
+                        self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                        self.submit.isEnabled = true
+                        self.activityIndicator.isHidden = true
                     }
                 })
             }
@@ -196,42 +187,53 @@ class LinkViewController : UIViewController,MKMapViewDelegate, UITextFieldDelega
     
     
     @IBAction func submit(_ sender: AnyObject) {
-
-    locationEntred.urlEntred = textField.text
+        
+        locationEntred.urlEntred = textField.text
         activityIndicator.startAnimating()
         
         self.UIEnable(status: false)
         performUIUpdatesOnMain() {
-        if self.textField.text == "" {
-            self.UIEnable(status: true)
-            let alert = UIAlertController()
-            alert.title = "URL field is empty"
-            alert.message = "Please enter the location url"
-            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                action in alert.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(action)
-            
-            
-            }
-            
-        else {
-            
-            self.updateTheList(comletionHandlerForUpdateTheList: { (success: Bool) in
-                if success == true {
-                    self.performSegue(withIdentifier: "tabBarViewController", sender: self)
-                } else {
-               self.UIEnable(status: true)
-                }
-            })
-        }
+            if self.textField.text == "" {
+                self.UIEnable(status: true)
+                self.showAlert(alerttitle: "URL field is empty"
+                    , alertmessage: "Please enter the location url")
                 
+            }
+                
+            else {
+                
+                self.updateTheList(comletionHandlerForUpdateTheList: { (success: Bool) in
+                    if success == true {
+                        self.performSegue(withIdentifier: "tabBarViewController", sender: self)
+                    } else {
+                        self.showAlert(alerttitle: "Cannot Connect To Server", alertmessage: "Please Check Your Internet Connection")
+                        self.submit.isEnabled = true
+                        self.activityIndicator.isHidden = true
+                    }
+                })
+            }
+            
+        }
     }
+    
+    @IBAction func Cancel(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
+    
     func UIEnable(status : Bool) {
         self.submit.isEnabled = status
         self.textField.isEnabled = status
         self.activityIndicator.isHidden = status
     }
+    func showAlert(alerttitle: String, alertmessage: String) {
+        let alertController = UIAlertController(title: alerttitle, message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            action in alertController.dismiss(animated: true, completion: nil)
+            
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
 }

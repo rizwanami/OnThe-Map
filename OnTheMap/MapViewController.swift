@@ -17,16 +17,16 @@ class mapView: UIViewController,MKMapViewDelegate
     @IBOutlet weak var pin: UIBarButtonItem!
     @IBOutlet weak var Refresh: UIBarButtonItem!
     
-        var annotations = [MKPointAnnotation]()
+    var annotations = [MKPointAnnotation]()
     
-
+    
     override func viewDidLoad()
     {
-        //Implement Annotation Load
+        
         self.loadAnnotation()
         self.studentMap.delegate = self
-    
-
+        
+        
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -38,7 +38,7 @@ class mapView: UIViewController,MKMapViewDelegate
             pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .infoLight)
             
-            //pinView!.rightCalloutAccessoryView = UIButtonType.detailDisclosure as? UIView
+            
         } else {
             pinView!.annotation = annotation
         }
@@ -46,36 +46,36 @@ class mapView: UIViewController,MKMapViewDelegate
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        //mapView.addAnnotation(annotations as! MKAnnotation)
         
-      if control == view.rightCalloutAccessoryView {
-           let app = UIApplication.shared
-
-        let mediaURLString = ((view.annotation?.subtitle)!)! as String
-        if  let mediaURl = URL(string : mediaURLString) {
-            if app.canOpenURL(mediaURl) {
-                app.openURL(mediaURl)
+        
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            
+            let mediaURLString = ((view.annotation?.subtitle)!)! as String
+            if  let mediaURl = URL(string : mediaURLString) {
+                if app.canOpenURL(mediaURl) {
+                    app.openURL(mediaURl)
+                } else {
+                    showAlert(alerttitle:"Incomplete URL" , alertmessage:  "Media URL [\(mediaURLString)] is incorrect or not fully formed")
+                }
             } else {
-                showAlert(alerttitle:"Incomplete URL" , alertmessage:  "Media URL [\(mediaURLString)] is incorrect or not fully formed")
+                showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
             }
-        } else {
-            showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
+            
+            
+            
+            
         }
-        
-        
-        
-
-      }
-   }
-
-
+    }
+    
+    
     @IBAction func pin(_ sender: AnyObject) {
-       
+        
         if  udacityUser.objectId == ""
         {
             performSegue(withIdentifier: "studentLocation", sender: self)
         } else {
-                        let alert = UIAlertController()
+            let alert = UIAlertController()
             alert.title = "Do you want to overwrite"
             alert.message = ""
             
@@ -92,19 +92,19 @@ class mapView: UIViewController,MKMapViewDelegate
         }
         
     }
-
-        
-        
-           
-            
+    
+    
+    
+    
+    
     
     @IBAction func refreshButton(_ sender: AnyObject) {
         let studentLocation = UdacityClient()
         studentLocation.getStudentLocations{(success, error) in
             if success == true {
                 performUIUpdatesOnMain{
-                self.UIEnable(status: true)
-                self.loadAnnotation()
+                    self.UIEnable(status: true)
+                    self.loadAnnotation()
                 }
             } else if (error == "The Internet connection appears to be offline.") {
                 
@@ -123,43 +123,39 @@ class mapView: UIViewController,MKMapViewDelegate
     @IBAction func logOut(_ sender: AnyObject) {
         let deletingCookies = UdacityClient()
         deletingCookies.logout(completionHandlerForLogOut:
-        { (success, error) in
-            if success == true {
-                self.performSegue(withIdentifier: "logOut", sender: self)
-            } else {
-                self.showAlert(alerttitle: "Logout Error", alertmessage: "\(error)")
-                self.UIEnable(status: true)
-                print("logOut Error is: \(error)")
-            }
+            { (success, error) in
+                if success == true {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showAlert(alerttitle: "Logout Error", alertmessage: "\(error)")
+                    self.UIEnable(status: true)
+                    print("logOut Error is: \(error)")
+                }
         })
     }
     
-    //func uiEnable(Status : Bool) {
-    //    pin.isEnabled = Status
-    //    Logout.isEnabled = Status
-    //    Refresh.isEnabled = Status
-    //}
     
-        //Load the Student Locations to the Map
     func loadAnnotation() {
         let locations = parseStudentLoc.studentLocations
         for Dictionary in locations! {
             if Dictionary["latitude"] != nil {
-            
+                
                 let lat = CLLocationDegrees(Dictionary["latitude"] as! Double)
                 let lon = CLLocationDegrees(Dictionary["longitude"] as! Double)
                 let coordinate = CLLocationCoordinate2D(latitude : lat, longitude : lon)
                 let first = Dictionary["firstName"] as! String
-                let last = Dictionary["lastName"] as! String
-                
                 if Dictionary["uniqueKey"]! as! String == udacityUser.userID {
-                    //self.showAlert(alerttitle: "User Found", alertmessage: Dictionary["lastName"] as! String)
+                    
                     udacityUser.objectId = Dictionary["objectId"] as! String
                 }
                 
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
+                if let last = Dictionary["lastName"] as? String {
+                    annotation.title = "\(first) \(last)"
+                } else {
+                    annotation.title = first
+                }
                 if let mediaurl = Dictionary["mediaURL"] as? String
                 {
                     annotation.subtitle = mediaurl
@@ -170,7 +166,7 @@ class mapView: UIViewController,MKMapViewDelegate
         self.studentMap.addAnnotations(annotations)
     }
     
-    //Display Alerts and Warning
+    
     func showAlert(alerttitle: String, alertmessage: String) {
         let alertController = UIAlertController(title: alerttitle, message: alertmessage as String, preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
@@ -187,8 +183,8 @@ class mapView: UIViewController,MKMapViewDelegate
         pin.isEnabled = status
         
     }
-
+    
     
 }
-    
+
 

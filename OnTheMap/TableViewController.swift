@@ -58,30 +58,15 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
         
     }
     
-@IBAction func refreshButton(_ sender: AnyObject) {
+    @IBAction func refreshButton(_ sender: AnyObject) {
         let studentLocation = UdacityClient()
         studentLocation.getStudentLocations{(success, error) in
             if success == true {
                 performUIUpdatesOnMain{
-                    
                     self.uiEnable(Status: true)
-                    
                 }
             } else if (error == "The Internet connection appears to be offline.") {
-                
-                
-                performUIUpdatesOnMain{
-                    let alert = UIAlertController()
-                    alert.title = "Unable Connect To Server"
-                    alert.message = "Check your internet connection"
-                    let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                        action in alert.dismiss(animated: true, completion: nil)
-                    }
-                    
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
-                    
-                }
+                self.showAlert(alerttitle: "Unable to Connect to Server", alertmessage: "Check your internet connection and try again.")
             } else {
                 self.uiEnable(Status: true)
                 print(error)
@@ -95,10 +80,7 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
         deletingCookies.logout(completionHandlerForLogOut:{(success, error) in
             if success == true {
                 
-                self.performSegue(withIdentifier: "logOut", sender: self)
-                
-                
-                
+                self.dismiss(animated: true, completion: nil)
             } else {
                 self.uiEnable(Status: true)
                 print("logOut Error is: \(error)")
@@ -146,9 +128,9 @@ class tableView: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             
         } else {
-        
+            
             self.showAlert(alerttitle: "Bad Media URL", alertmessage: "Media URL [\(mediaURLString)] is invalid")
-        } 
+        }
         
     }
     

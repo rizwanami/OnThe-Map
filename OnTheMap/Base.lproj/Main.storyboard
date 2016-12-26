@@ -161,7 +161,6 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="fvU-9A-jdr">
                                             <connections>
                                                 <action selector="logOut:" destination="VNa-zv-RkM" id="boA-ZV-I54"/>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="1ht-Ph-zep"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
@@ -219,7 +218,6 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="Pjw-a9-3cB">
                                             <connections>
                                                 <action selector="logOut:" destination="PjI-Z2-R95" id="83D-vc-3b2"/>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="zhI-kh-cOV"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
@@ -263,7 +261,7 @@
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Wgk-I6-svh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ff-hw-vQY">
                                 <items>
@@ -300,6 +298,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="7ff-hw-vQY" firstAttribute="top" secondItem="1tc-M7-Xj7" secondAttribute="bottom" id="45N-15-j9m"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p2d-yz-wql" secondAttribute="trailing" constant="-1" id="4EG-FD-jGq"/>
                             <constraint firstItem="p2d-yz-wql" firstAttribute="top" secondItem="0Jx-IU-6KS" secondAttribute="bottom" constant="48" id="4KI-AV-oZZ"/>
                             <constraint firstItem="NUT-Ux-Yiu" firstAttribute="centerX" secondItem="Wgk-I6-svh" secondAttribute="centerX" id="GuE-33-yG5"/>
                             <constraint firstItem="xFo-3D-1IP" firstAttribute="centerX" secondItem="Wgk-I6-svh" secondAttribute="centerX" id="Rrv-HN-cQh"/>
@@ -309,8 +308,8 @@
                             <constraint firstItem="xFo-3D-1IP" firstAttribute="top" secondItem="NUT-Ux-Yiu" secondAttribute="bottom" constant="56" id="efu-zG-KuR"/>
                             <constraint firstItem="0Jx-IU-6KS" firstAttribute="leading" secondItem="Wgk-I6-svh" secondAttribute="leadingMargin" constant="16" id="nht-BZ-bVs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0Jx-IU-6KS" secondAttribute="trailing" constant="16" id="peJ-1p-SsR"/>
-                            <constraint firstItem="p2d-yz-wql" firstAttribute="centerX" secondItem="Wgk-I6-svh" secondAttribute="centerX" id="t7w-EV-oHF"/>
                             <constraint firstItem="0Jx-IU-6KS" firstAttribute="top" secondItem="7ff-hw-vQY" secondAttribute="bottom" constant="48" id="uGf-h6-b2L"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="p2d-yz-wql" secondAttribute="leading" id="uwL-BE-1DN"/>
                             <constraint firstItem="7ff-hw-vQY" firstAttribute="leading" secondItem="Wgk-I6-svh" secondAttribute="leading" id="zeu-5u-3zV"/>
                         </constraints>
                     </view>
@@ -322,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fb-Vp-bA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2876" y="-716"/>
+            <point key="canvasLocation" x="2876" y="-716.49175412293857"/>
         </scene>
         <!--LinkViewController-->
         <scene sceneID="bl8-CV-hd4">
@@ -359,7 +358,7 @@
                                     <navigationItem title="Title" id="4tP-fv-Nm4">
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="h8V-za-fUw">
                                             <connections>
-                                                <segue destination="Zw8-mH-uu0" kind="show" id="ufX-kt-hgZ"/>
+                                                <action selector="Cancel:" destination="YIh-XZ-dp8" id="yaR-Me-9OA"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -420,8 +419,7 @@
         <image name="udacity" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IDB-Il-3mm"/>
+        <segue reference="RYo-aY-VjP"/>
         <segue reference="3bQ-my-BXe"/>
-        <segue reference="zhI-kh-cOV"/>
     </inferredMetricsTieBreakers>
 </document>

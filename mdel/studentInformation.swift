@@ -19,8 +19,13 @@ struct studentInformation
     init(dictionary: [String : AnyObject])
     {
         let firstName = dictionary["firstName"] as! String
-        let lastName = dictionary["lastName"] as! String
-        self.name = "\(firstName) \(lastName)"
+        
+        if let lastName = dictionary["lastName"] as? String
+        {
+            self.name = "\(firstName) \(lastName)"
+        } else {
+            self.name = firstName
+        }
         
         if let mapString = dictionary["mapString"] as? String {
             self.location = mapString
